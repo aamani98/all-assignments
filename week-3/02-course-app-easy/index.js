@@ -49,7 +49,7 @@ app.post("/admin/courses", adminAuthentication, (req, res) => {
 });
 
 app.put("/admin/courses/:courseId", adminAuthentication, (req, res) => {
-  const courseId = parseInt(req.params);
+  const courseId = parseInt(req.params.courseId);
   const courseIndex = COURSES.findIndex((c) => c.courseId === courseId);
   if (courseIndex === -1) return res.json({ messgae: "Course not find" }).send(400);
   else {
@@ -72,6 +72,7 @@ app.post("/users/signup", (req, res) => {
   if (user) return res.json({ messgae: "User already exists" }).status(403);
   else {
     USERS.push({ username, password, purchasedCourses: [] });
+    res.json({ messgae: "User created successfully" });
   }
 });
 
